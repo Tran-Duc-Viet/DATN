@@ -1,0 +1,32 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div class="row mb-3">
+        <div class="col">
+          <input
+            #query1
+            type="text"
+            class="form-control"
+            placeholder="Enter Date (dd/mm/yyyy)"
+            (keyup)="filter(query1.value)"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Loop over the collection of orders -->
+        <div *ngFor="let order of filteredOrders" class="col-md-3">
+          <div class="card" style="width: 15rem" [routerLink]="['/manage/paid-orders/order-detail/',order.id]">
+            <div class="card-body">
+              <h2 class="card-title">Table: {{order.tableNum}}</h2>
+              <div class="card-text">
+                <p class="price">Total Price {{order.totalPrice}} đ</p>
+                <p>Number of dish: {{order.totalQuantity}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

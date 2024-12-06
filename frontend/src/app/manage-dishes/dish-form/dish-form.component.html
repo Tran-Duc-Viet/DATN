@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-container form-outline">
+      <form #f="ngForm" [formGroup]="newDishForm" (ngSubmit)="save(f.value)">
+        <mat-form-field class="col-lg-12">
+          <mat-label for="name">Name</mat-label>
+          <input matInput id="name" name="name" type="text" formControlName="name" required>
+          <mat-error *ngIf="name?.errors?.['required']">
+            Name is required.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-lg-12">
+          <mat-label for="typeOfDish">Type Of Dish</mat-label>
+          <mat-select name="typeOfDish" id="typeOfDish" formControlName="typeOfDish">
+            <mat-option *ngFor="let s of typeOfDishData" [value]="s">
+              {{s}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="typeOfDish?.errors?.['required']">
+            Type Of Dish is required.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-lg-12">
+          <mat-label for="price">Price</mat-label>
+          <input matInput formControlName="price" id="price" name="price" type="number" required min>
+          <span matTextSuffix>$&nbsp;</span>
+          <mat-error *ngIf="price?.errors?.['required']">
+            Price is required.
+          </mat-error>
+          <mat-error *ngIf="price?.errors?.['min']">
+            Price should be 0 or Higher.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-lg-12">
+          <mat-label for="dishImageUrl">Image URL</mat-label>
+          <input matInput name="dishImageUrl" id="dishImageUrl" type="text" formControlName="dishImageUrl" required>
+          <mat-error *ngIf="dishImageUrl?.errors?.['required']">
+            Image URL is required.
+          </mat-error>
+          <mat-error *ngIf="dishImageUrl?.errors?.['pattern']">
+            Please enter a valid URL.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-lg-12">
+          <mat-label for="specification">Specification</mat-label>
+          <textarea matInput name="specification" id="specification" formControlName="specification"></textarea>
+        </mat-form-field>
+        <div class="mb-4">
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-lg btn-block col-lg-12">Save</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="name?.value" class="card" style="width: 20rem;">
+      <img *ngIf="dishImageUrl?.value" [src]="dishImageUrl.value" class="card-img-top">
+    </div>
+  </div>
+</div>

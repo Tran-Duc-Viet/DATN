@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-6">
+    <div class="form-container form-outline">
+      <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+        <h1>New Account</h1>
+        <!-- Email input -->
+
+        <div class="form-outline mb-4">
+          <mat-form-field class="col-lg-12">
+            <mat-label>Enter your username</mat-label>
+            <input
+              matInput
+              placeholder="username"
+              formControlName="userName"
+              required
+            />
+            <mat-error *ngIf="userName?.errors?.['required']">
+              You must enter a username.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <mat-form-field class="col-lg-12">
+            <mat-label>Enter your password</mat-label>
+            <input
+              matInput
+              [type]="hide1 ? 'password' : 'text'"
+              formControlName="password"
+              required
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide1 = !hide1"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide1"
+            >
+              <mat-icon>{{ hide1 ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-error *ngIf="password?.errors?.['required']">
+              Password is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-outline mb-4">
+          <mat-form-field class="col-lg-12">
+            <mat-label>Enter your confirm password</mat-label>
+            <input
+              matInput
+              [type]="hide2 ? 'password' : 'text'"
+              formControlName="confirmPassword"
+              required
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide2 = !hide2"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide2"
+            >
+              <mat-icon>{{ hide2 ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-error *ngIf="password?.errors?.['required']">
+              Confirm password is required.
+            </mat-error>
+            <mat-error *ngIf="confirmPassword?.hasError('passwordMismatch')">Passwords must match.</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-outline mb-4">
+          <mat-form-field class="col-lg-12">
+          <mat-label for="role">Role</mat-label>
+          <mat-select name="role" id="role" formControlName="role">
+            <mat-option *ngFor="let s of roles" [value]="s">
+              {{s}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="role?.errors?.['required']">
+            Role is required.
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+
+
+        <div class="mb-4">
+          <!-- Submit button -->
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-block col-lg-12"
+            [disabled]="signUpForm.invalid"
+
+
+          >
+            Create new account
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

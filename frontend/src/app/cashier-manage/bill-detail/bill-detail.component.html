@@ -1,0 +1,103 @@
+<div class="container mt-5">
+  <div class="card p-3">
+    <div class="row">
+      <div class="col-6">
+        <img *ngIf="qrPayChecked && text" class="card-img-top" [src]="text" alt="QR Code" />
+      </div>
+      <div class="col-6" *ngIf="order">
+        <div class="card card-bill">
+          <div class="card-header text-center">
+            <h1>Bill</h1>
+          </div>
+          <div class="card-body">
+            <h2>Table: {{ order.tableNum }}</h2>
+            <p>Status: {{ order.status }}</p>
+            <p>Order Created By: {{user.userName}}</p>
+            <p>Time Created: {{ order.timeCreated }}</p>
+            <p>Last Updated: {{ order.lastUpdated }}</p>
+            <br />
+            <table class="table table-bordered print-table">
+              <thead class="thead table-dark">
+                <tr>
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Amount</th>
+                  <th class="text-center">Quantity</th>
+                  <th class="text-center">Total</th>
+                </tr>
+              </thead>
+              <tbody class="tbody">
+                <tr *ngFor="let orderDish of groupedOrderDishes">
+                  <td class="text-center">{{ orderDish.nameOfDish }}</td>
+                  <td class="text-center">{{ orderDish.unitPrice }}</td>
+                  <td class="text-center">{{ orderDish.quantity }}</td>
+                  <td class="text-right" [innerHtml]="calculateTotal(orderDish)"></td>
+                </tr>
+              </tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td class="text-center">Total</td>
+                <td class="text-center">{{ order.totalPrice }} đ</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="print-hidden">
+          <div *ngIf="payByCashChecked" class="input-group col-lg-12 customer-pay-input">
+            <span class="input-group-text" id="basic-addon1">Customer Pay</span>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="0.0"
+              aria-label="0.0"
+              aria-describedby="basic-addon1"
+              [formControl]="f.customerPay"
+              (change)="calculateReturnMoney()"
+              (input)="calculateReturnMoney()"
+            />
+            <!-- Validation error messages -->
+            <div *ngIf="f.customerPay.invalid && (f.customerPay.dirty || f.customerPay.touched)" class="text-danger">
+              <div *ngIf="f.customerPay.errors?.['required']" class="mt-1">
+                Customer Pay is required
+              </div>
+              <div *ngIf="f.customerPay.errors?.['min']" class="mt-1">
+                Customer Pay must be greater than or equal to 0
+              </div>
+            </div>
+          </div>
+          <!-- Return money input -->
+          <div  *ngIf="payByCashChecked" class="input-group col-lg-12 return-money-input">
+            <span class="input-group-text" id="basic-addon1">Return Money</span>
+            <input
+            [disabled]="true"
+              type="number"
+              class="form-control"
+              placeholder="0.0"
+              aria-label="Return Money"
+              aria-describedby="basic-addon1"
+              [(ngModel)]="returnMoney"
+            />
+          </div>
+          <div class="form-check">
+            <input class="form-check-input-lg" type="radio" name="payMethod" id="payByCash" (click)="onPayByCashClick()" [checked]="payByCashChecked" />
+            <label class="form-check-label-lg" for="payByCash">
+              <h3>Pay By Cash</h3>
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input-lg" type="radio" name="payMethod" id="qrPay" (click)="onQrPayClick()" [checked]="qrPayChecked" />
+            <label class="form-check-label-lg" for="qrPay">
+              <h3>Qr Pay</h3>
+            </label>
+          </div>
+          <button class="btn btn-primary print-hidden btn-lg btn-block col-lg-12" (click)="pay()">
+            Pay
+          </button>
+          <button class="btn btn-secondary print-hidden btn-lg btn-block col-lg-12" (click)="printBillAndNavigaeBacks()">
+            Print Bill
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

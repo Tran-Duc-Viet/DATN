@@ -1,0 +1,86 @@
+<p>
+  <a routerLink="/manage/dishes/new" class="btn btn-primary">New dish</a>
+</p>
+<p>
+  <input
+    #query
+    (keyup)="filter(query.value)"
+    type="text"
+    class="form-control"
+    placeholder="Search by name..."
+  />
+</p>
+<mat-sidenav-container fxFlex="0 1 auto">
+  <mat-sidenav
+    #sidenav
+    position="start"
+    mode="side"
+    opened="false"
+    class="width-30 p-6"
+  >
+    SIDENAV CONTENT HERE
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matPaginator>
+        <!-- Index column -->
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef>#</th>
+          <td mat-cell *matCellDef="let i = index">{{ i + 1 }}</td>
+        </ng-container>
+
+        <!-- Image URL Column -->
+        <ng-container matColumnDef="imageUrl" class="image-url-column">
+          <th mat-header-cell *matHeaderCellDef>Image</th>
+          <td mat-cell *matCellDef="let element"><img [src]="element.dishImageUrl" class="card-img-top"></td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <!-- Company Name Column -->
+        <ng-container matColumnDef="typeOfDish">
+          <th mat-header-cell *matHeaderCellDef>Type Of Dish</th>
+          <td mat-cell *matCellDef="let element">{{ element.typeOfDish }}</td>
+        </ng-container>
+
+        <!-- Storages Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+        </ng-container>
+
+
+
+        <!-- Specification Column -->
+        <ng-container matColumnDef="specification">
+          <th mat-header-cell *matHeaderCellDef>Specification</th>
+          <td mat-cell *matCellDef="let element">
+            <p [innerHTML]="getHighlights(element.specification)"></p>
+          </td>
+        </ng-container>
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <a [routerLink]="['/manage/dishes/',element.id]">Edit</a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
+      </mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

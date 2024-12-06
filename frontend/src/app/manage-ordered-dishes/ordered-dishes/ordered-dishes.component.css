@@ -1,0 +1,30 @@
+.image-url-column {
+  text-align: center;
+}
+
+.image-url-column img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 100px;
+}
+.image-url-column th,
+.image-url-column td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+img{
+  height: 100px;
+  width: 100px;
+}
+
+th,td{
+  text-align: center;
+}
+h3{
+  background-color: black;
+  color: white;
+  padding: 10px;
+}

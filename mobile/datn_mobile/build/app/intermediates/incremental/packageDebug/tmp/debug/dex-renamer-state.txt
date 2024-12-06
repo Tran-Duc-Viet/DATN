@@ -1,0 +1,4 @@
+#Sun Jul 07 22:47:24 ICT 2024
+base.0=D\:\\DATN\\mobile\\datn_mobile\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

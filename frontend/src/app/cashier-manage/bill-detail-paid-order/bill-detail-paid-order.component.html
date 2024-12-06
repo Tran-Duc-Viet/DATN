@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <div class="card p-3">
+    <div class="row justify-content-center">
+      <div class="col-6" *ngIf="order">
+        <div class="card card-bill mx-auto" style="max-width: 600px;">
+          <div class="card-header text-center">
+            <h1>Bill</h1>
+          </div>
+          <div class="card-body">
+            <h2>Table: {{ order.tableNum }}</h2>
+            <p>Status: {{ order.status }}</p>
+            <p>Order Created By: {{user.userName}}</p>
+            <p>Time Created: {{ order.timeCreated }}</p>
+            <p>Last Updated: {{ order.lastUpdated }}</p>
+            <p>Pay method: {{paymethod}}</p>
+            <p *ngIf="order.payByCash">Customer Pay: {{order.customerPay}} đ</p>
+            <p *ngIf="order.payByCash">Return Money: {{order.returnMoney}} đ</p>
+            <br />
+            <table class="table table-bordered print-table">
+              <thead class="thead table-dark">
+                <tr>
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Amount</th>
+                  <th class="text-center">Quantity</th>
+                  <th class="text-center">Total</th>
+                </tr>
+              </thead>
+              <tbody class="tbody">
+                <tr *ngFor="let orderDish of groupedOrderDishes">
+                  <td class="text-center">{{ orderDish.nameOfDish }}</td>
+                  <td class="text-center">{{ orderDish.unitPrice }} đ</td>
+                  <td class="text-center">{{ orderDish.quantity }}</td>
+                  <td
+                    class="text-center"
+                    [innerHtml]="calculateTotal(orderDish)"
+                  ></td>
+                </tr>
+              </tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td class="text-center text-total">Total</td>
+                <td class="text-center text-total-price">{{ order.totalPrice }} đ</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

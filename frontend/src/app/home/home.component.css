@@ -1,0 +1,10 @@
+.welcome-text {
+      font-size: 3em; /* Kích thước chữ lớn */
+      color: #333; /* Màu chữ */
+      text-align: center; /* Căn giữa văn bản */
+      padding: 20px;
+      border: 2px solid #333; /* Đường viền quanh văn bản */
+      border-radius: 10px; /* Bo tròn các góc của đường viền */
+      background-color: #fff; /* Màu nền của văn bản */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    }

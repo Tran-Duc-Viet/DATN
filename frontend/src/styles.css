@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+/* src/styles.css or component-specific CSS file */
+
+
+
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight:400;
+  font-size: 0.875rem;
+  opacity: 1;
+  margin: 0;
+}
+
+aside {
+  height: 100vh;
+}
+
+h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.275rem;
+  color: var(--bs-emphasis-color);
+}
+
+/* Layout for admin dashboard skeleton */
+
+.avatar {
+  height: 40px;
+  width: 40px;
+}
+
+.navbar-expand .navbar-nav {
+  margin-left: auto;
+}
+
+.content {
+  flex: 1;
+  max-width: 100vw;
+  width: 100vw;
+}
+
+@media (min-width: 768px) {
+  .content {
+    max-width: auto;
+    width: auto;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #333;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 15px;
+}
+
+h6 {
+  font-size: 13px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
